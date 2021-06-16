@@ -2,9 +2,9 @@
 @module loss
 Various loss functions for dependency parsing.
 
-loss_*(parser, inputs)
-  @param parser *Parser object. Refer to 'model.py' for more details.
-  @param inputs List of dictionaries. Refer to 'corpus.py' for more details.
+loss_*(model, inputs)
+  @param model Model object. Refer to '..model' for more details.
+  @param inputs List of dictionaries. Refer to 'dataset.py' for more details.
   
   @return Loss value.
 """
