@@ -15,3 +15,5 @@ def register_loss_fn(name):
     sentiment_loss_fn[name] = fn
     return fn
   return decorator
+
+from .loss_nll import loss_nll

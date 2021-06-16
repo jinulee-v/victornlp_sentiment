@@ -53,23 +53,15 @@ class TreeLSTMSentiment(nn.Module):
       nn.LogSoftmax(dim=1)
     )
   
-  def run(self, inputs, lengths=None):
+  def run(self, inputs):
     """
     Runs the model and obtain softmax-ed scores for each possible labels.
     
     @param self The object pointer.
     @param inputs List of dictionaries. Refer to 'dataset.py' for more details.
-    @param lengths Tensor(batch_size). Contains length information, but for default it uses word_count data.
     @return scores Tensor(batch, labels). scores[i][j] contains the log(probability) of i-th sentence in batch having j-th label.
     """
     batch_size = len(inputs)
-    if lengths is None:
-      lengths = torch.zeros(batch_size, dtype=torch.long).detach()
-      for i, input in enumerate(inputs):
-        lengths[i] = input['word_count'] + 1 # Dependency tree requires [ROOT] node; index 0 is given
-    else:
-      assert lengths.dim()==1 and lengths.size(0) == batch_size
-      lengths = lengths.detach()
     
     # Embedding
     embedded = []
