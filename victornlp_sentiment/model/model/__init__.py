@@ -4,3 +4,5 @@ def register_model(name):
     sentiment_model[name] = cls
     return cls
   return decorator
+
+from .TreeLSTMSentiment import TreeLSTMSentiment

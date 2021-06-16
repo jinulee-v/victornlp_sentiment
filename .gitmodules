@@ -1,3 +1,4 @@
 [submodule "victornlp_sentiment/victornlp_utils"]
 	path = victornlp_sentiment/victornlp_utils
 	url = https://www.github.com/jinulee-v/victornlp_utils
+	branch = treelstm
