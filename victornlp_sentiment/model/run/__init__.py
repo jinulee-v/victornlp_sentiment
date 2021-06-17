@@ -1,6 +1,6 @@
 """
-@module parse
-Various parsing functions based on attention scores.
+@module run
+Various running functions that adds answer data to the input.
 
 run(model, inputs, config)
   @param model Model object. Refer to '.*' for more details.
@@ -9,7 +9,7 @@ run(model, inputs, config)
 """
 
 sentiment_run_fn = {}
-def register_parse_fn(name):
+def register_run_fn(name):
   def decorator(fn):
     sentiment_run_fn[name] = fn
     return fn

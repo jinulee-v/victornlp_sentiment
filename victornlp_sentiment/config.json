@@ -102,8 +102,8 @@
   "train": {
     "language": "korean",
     "model": "tree-lstm",
-    "loss_fn": "local-xbce",
-    "run_fn": "run_sentiment",
+    "loss_fn": "nll",
+    "run_fn": "argmax",
     "epoch": 100,
     "batch_size": 64,
     "optimizer": "adam",
