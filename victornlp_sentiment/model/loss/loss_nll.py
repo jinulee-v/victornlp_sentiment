@@ -24,13 +24,13 @@ def loss_nll(model, inputs, **kwargs):
   
   scores = model.run(inputs, **kwargs)
   assert scores.size(1) == len(model.labels)
-  true_labels = torch.zeros(batch_size, device=device, dtype=torch.long)
+  true_labels = torch.zeros(scores.size(), device=device, dtype=torch.long).detach()
 
   for i, input in enumerate(inputs):
-    true_labels[i] = model.labels_stoi[input['sentiment']]
-  true_labels.unsqueeze(1)
+    for phrase_sent in input['sentiment']:
+      true_labels[i, phrase_sent['head'], model.labels_stoi['label']] = 1
   
-  loss = - torch.sum(torch.gather(scores, 1, true_labels)) / batch_size
+  loss = - torch.sum((scores * true_labels)) / batch_size
 
   return loss  
   

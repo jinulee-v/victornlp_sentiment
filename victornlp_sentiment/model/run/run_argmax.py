@@ -19,13 +19,14 @@ def run_argmax(model, inputs, config):
   batch_size = len(inputs)
   
   scores = model.run(inputs, **kwargs)
-  best_label = torch.argmax(scores, 1).cpu()
+  best_label = torch.argmax(scores, 2).cpu()
 
   for input, label in zip(inputs, best_label):
     if 'sentiment' in input:
       key = 'sentiment'
     else:
       key = 'sentiment_predict'
-    input[key] = model.labels[label.item()]
+    input[key] = [model.labels[label_id] for label_id in label]
+
   
   return input

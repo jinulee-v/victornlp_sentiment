@@ -59,7 +59,7 @@ class TreeLSTMSentiment(nn.Module):
     
     @param self The object pointer.
     @param inputs List of dictionaries. Refer to 'dataset.py' for more details.
-    @return scores Tensor(batch, labels). scores[i][j] contains the log(probability) of i-th sentence in batch having j-th label.
+    @return scores Tensor(batch, max_len, labels). scores[i][j] contains the log(probability) of i-th sentence in batch having j-th label.
     """
     batch_size = len(inputs)
     
@@ -73,11 +73,11 @@ class TreeLSTMSentiment(nn.Module):
     results = []
     for i, input in enumerate(inputs):
       hidden_state, _ = self.encoder(input['dependency'], embedded[i], 0)
-      results.append(hidden_state[0].unsqueeze(0))#  Pick only hidden state of the ROOT.and
+      results.append(hidden_state.unsqueeze(0))#  Pick only hidden state of the ROOT.and
     results = torch.cat(results, dim=0)
 
-    # results: Tensor(batch_size, hidden_size)
+    # results: Tensor(batch_size, length, hidden_size)
     results = self.prediction(results)
-    # results: Tensor(batch_size, len(labels))
+    # results: Tensor(batch_size, length, len(labels))
 
     return results
