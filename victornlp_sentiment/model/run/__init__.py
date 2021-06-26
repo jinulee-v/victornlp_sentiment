@@ -14,3 +14,5 @@ def register_run_fn(name):
     sentiment_run_fn[name] = fn
     return fn
   return decorator
+
+from .run_argmax import *

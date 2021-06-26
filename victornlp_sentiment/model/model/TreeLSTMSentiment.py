@@ -50,7 +50,7 @@ class TreeLSTMSentiment(nn.Module):
 
     self.prediction = nn.Sequential(
       nn.Linear(self.hidden_size, len(self.labels)),
-      nn.LogSoftmax(dim=1)
+      nn.LogSoftmax(dim=2)
     )
   
   def run(self, inputs):

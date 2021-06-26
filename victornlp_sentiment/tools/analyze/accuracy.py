@@ -16,17 +16,33 @@ def analyze_accuracy(inputs):
   """
 
   total = 0
-  correct = 0
+  accurate = 0
+  total_label = {}
+  accurate_label = {}
   for input in inputs:
-    assert 'sentiment' in inputs
-    assert 'sentiment_predict' in inputs
+    assert 'sentiment' in input
+    assert 'sentiment_predict' in input
 
     for correct in input['sentiment']:
       total += 1
+      if correct['label'] not in total_label:
+        total_label[correct['label']] = 0
+      total_label[correct['label']] += 1
+
       for guess in input['sentiment_predict']:
         if correct['head'] == guess['head']:
-          correct += 1
+          if correct['label'] == guess['label']:
+            accurate += 1
+            if correct['label'] not in accurate_label:
+              accurate_label[correct['label']] = 0
+            accurate_label[correct['label']] += 1
+
         if correct['head'] <= guess['head']:
           break
   
-  return round(correct/total*100, 2)
+  return {
+    'total': round(accurate/total*100, 2),
+    'per_label': {
+      label:round(accurate_label[label]/total_label[label]*100, 2) for label in sorted(list(total_label.keys()))
+    }
+  }

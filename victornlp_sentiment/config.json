@@ -14,12 +14,12 @@
     },
     "english": {
       "corpus": {
-        "train": "corpus/VictorNLP_eng()_train.json",
-        "dev": "corpus/VictorNLP_eng()_dev.json",
-        "test": "corpus/VictorNLP_eng()_test.json",
-        "labels": "corpus/VictorNLP_eng()_labels.json"
+        "train": "corpus/VictorNLP_eng(SST)_train.json",
+        "dev": "corpus/VictorNLP_eng(SST)_dev.json",
+        "test": "corpus/VictorNLP_eng(SST)_test.json",
+        "labels": "corpus/VictorNLP_eng(SST)_labels.json"
       },
-      "embedding": ["etri-korbert"],
+      "embedding": ["glove-eng", "pos-eng"],
       "preprocessors": ["word-count"],
       "run": {
       }
@@ -100,7 +100,7 @@
     }
   },
   "train": {
-    "language": "korean",
+    "language": "english",
     "model": "tree-lstm",
     "loss_fn": "nll",
     "run_fn": "argmax",

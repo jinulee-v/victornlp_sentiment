@@ -19,18 +19,21 @@ def loss_nll(model, inputs, **kwargs):
   
   @return loss loss value.
   """
-  device = next(parser.parameters()).device
+  torch.autograd.set_detect_anomaly(True)
+  device = next(model.parameters()).device
   batch_size = len(inputs)
   
   scores = model.run(inputs, **kwargs)
-  assert scores.size(1) == len(model.labels)
-  true_labels = torch.zeros(scores.size(), device=device, dtype=torch.long).detach()
+  assert scores.size(2) == len(model.labels)
+  true_labels = torch.zeros_like(scores).detach()
 
+  count = 0
   for i, input in enumerate(inputs):
     for phrase_sent in input['sentiment']:
-      true_labels[i, phrase_sent['head'], model.labels_stoi['label']] = 1
+      true_labels[i, phrase_sent['head'], model.labels_stoi[phrase_sent['label']]] = 1
+      count += 1
   
-  loss = - torch.sum((scores * true_labels)) / batch_size
+  loss = - torch.sum(scores * true_labels) / count
 
   return loss  
   

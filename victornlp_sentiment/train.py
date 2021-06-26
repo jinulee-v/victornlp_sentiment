@@ -29,7 +29,7 @@ from .tools.analyze import sentiment_analysis_fn
 
 def argparse_cmd_args() :
   parser = argparse.ArgumentParser(description='Train the sentiment analysis model.')
-  parser.add_argument('--config-file', type=str, default='victornlp_dsentiment/config.json')
+  parser.add_argument('--config-file', type=str, default='victornlp_sentiment/config.json')
   parser.add_argument('--title', type=str)
   parser.add_argument('--language', type=str, help='language. Currently supported: {korean, english}')
   parser.add_argument('--model', choices=sentiment_model.keys(), help='sentiment model. Choose sentiment name from default config file.')
