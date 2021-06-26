@@ -14,10 +14,10 @@
     },
     "english": {
       "corpus": {
-        "train": "corpus/VictorNLP_eng(SST)_train.json",
-        "dev": "corpus/VictorNLP_eng(SST)_dev.json",
-        "test": "corpus/VictorNLP_eng(SST)_test.json",
-        "labels": "corpus/VictorNLP_eng(SST)_labels.json"
+        "train": "corpus/VictorNLP_eng(SST_binary)_train.json",
+        "dev": "corpus/VictorNLP_eng(SST_binary)_dev.json",
+        "test": "corpus/VictorNLP_eng(SST_binary)_test.json",
+        "labels": "corpus/VictorNLP_eng(SST_binary)_labels.json"
       },
       "embedding": ["glove-eng", "pos-eng"],
       "preprocessors": ["word-count"],

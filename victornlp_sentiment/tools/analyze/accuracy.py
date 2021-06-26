@@ -24,19 +24,18 @@ def analyze_accuracy(inputs):
     assert 'sentiment_predict' in input
 
     for correct in input['sentiment']:
-      total += 1
       if correct['label'] not in total_label:
         total_label[correct['label']] = 0
+        accurate_label[correct['label']] = 0
+      
+      total += 1
       total_label[correct['label']] += 1
 
       for guess in input['sentiment_predict']:
         if correct['head'] == guess['head']:
           if correct['label'] == guess['label']:
             accurate += 1
-            if correct['label'] not in accurate_label:
-              accurate_label[correct['label']] = 0
             accurate_label[correct['label']] += 1
-
         if correct['head'] <= guess['head']:
           break
   
