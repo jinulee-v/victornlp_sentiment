@@ -19,7 +19,7 @@
         "test": "corpus/VictorNLP_eng(SST_binary)_test.json",
         "labels": "corpus/VictorNLP_eng(SST_binary)_labels.json"
       },
-      "embedding": ["glove-eng", "pos-eng"],
+      "embedding": ["glove-eng"],
       "preprocessors": ["word-count"],
       "run": {
       }
@@ -96,7 +96,7 @@
   },
   "model": {
     "tree-lstm": {
-      "hidden_size": 512
+      "hidden_size": 168
     }
   },
   "train": {
@@ -105,7 +105,7 @@
     "loss_fn": "nll",
     "run_fn": "argmax",
     "epoch": 100,
-    "batch_size": 64,
+    "batch_size": 1,
     "optimizer": "adam",
     "learning_rate": 0.001,
     "device": "cuda:0",
